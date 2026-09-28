@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Very Important Request 🍓</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffe4ee; --card:#fff8fb; --ink:#5a2a3f; --pink:#ff6f9f; --deep:#e0457b; --soft:#ffc2d8;
+  --display:'Pacifico','Brush Script MT',cursive; --body:'Fredoka','Trebuchet MS',sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#2a1220;--card:#3b1a2e;--ink:#ffe4ee;--soft:#6b2e4d}
+}
+:root[data-theme="dark"]{--bg:#2a1220;--card:#3b1a2e;--ink:#ffe4ee;--soft:#6b2e4d}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);
+  background-image:radial-gradient(var(--soft) 2px,transparent 2px);background-size:26px 26px;overflow-x:hidden}
+input{position:absolute;opacity:0;pointer-events:none}
+
+/* floating hearts */
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.hearts span{position:absolute;bottom:-40px;font-size:24px;animation:rise 9s linear infinite;opacity:.8}
+.hearts span:nth-child(1){left:8%;animation-delay:0s}
+.hearts span:nth-child(2){left:24%;animation-delay:2s;font-size:32px}
+.hearts span:nth-child(3){left:42%;animation-delay:4s}
+.hearts span:nth-child(4){left:60%;animation-delay:1s;font-size:30px}
+.hearts span:nth-child(5){left:76%;animation-delay:5s}
+.hearts span:nth-child(6){left:90%;animation-delay:3s;font-size:28px}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+
+main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:28px 18px 60px;text-align:center}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,9vw,3rem);color:var(--deep);margin:8px 0 4px;line-height:1.2}
+.sub{margin:0 0 22px;font-size:1.05rem}
+.bear{font-size:64px;display:inline-block;animation:wiggle 2.4s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+
+.card{background:var(--card);border:3px dashed var(--pink);border-radius:28px;padding:20px 20px 12px;margin:0 0 20px;text-align:left}
+.card h2{font-family:var(--display);font-weight:400;color:var(--deep);text-align:center;margin:0 0 10px;font-size:1.5rem}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{padding:9px 0 9px 38px;position:relative;border-bottom:2px dotted var(--soft);font-weight:500}
+.card li:last-child{border:0}
+.card li::before{content:"💖";position:absolute;left:4px;top:7px}
+
+.tag{display:inline-block;background:var(--pink);color:#fff;border-radius:999px;padding:6px 16px;font-weight:600;margin-bottom:10px}
+.gift{font-size:2.6rem;margin:6px 0;display:block;animation:wiggle 3s ease-in-out infinite}
+
+.q{font-family:var(--display);font-size:1.6rem;color:var(--deep);margin:24px 0 14px;line-height:1.3}
+.btns{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:90px}
+label.btn{cursor:pointer;border-radius:999px;font-weight:600;font-size:1.1rem;padding:14px 30px;
+  transition:transform .25s ease,background .25s;user-select:none;-webkit-tap-highlight-color:transparent}
+.yes{background:var(--pink);color:#fff;box-shadow:0 6px 0 var(--deep)}
+.yes:hover{transform:scale(1.08)}
+.yes:active{transform:translateY(4px);box-shadow:0 2px 0 var(--deep)}
+.no{background:var(--card);color:var(--ink);border:3px solid var(--soft)}
+.no:hover{transform:translate(40px,-6px) scale(.85)}
+
+.plead,.yay,.no2,.no3{display:none}
+.plead{font-weight:500;margin-top:4px}
+/* 1st no */
+#no1:checked ~ main .no1{display:none}
+#no1:checked ~ main .no2{display:inline-block}
+#no1:checked ~ main .p1{display:block;animation:pop .4s ease}
+#no1:checked ~ main .yes{transform:scale(1.15)}
+/* 2nd no */
+#no2:checked ~ main .no1,#no2:checked ~ main .no2{display:none}
+#no2:checked ~ main .no3{display:inline-block}
+#no2:checked ~ main .p2{display:block;animation:pop .4s ease}
+#no2:checked ~ main .yes{transform:scale(1.3)}
+/* 3rd no: the No button gives up */
+#no3:checked ~ main .no{display:none}
+#no3:checked ~ main .p3{display:block;animation:pop .4s ease}
+#no3:checked ~ main .yes{transform:scale(1.45);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 6px 0 var(--deep),0 0 0 14px rgba(255,111,159,.3)}}
+
+#yes:checked ~ main .ask{display:none}
+#yes:checked ~ main .yay{display:block;animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.yay .big{font-size:80px;display:block;animation:wiggle 1.2s ease-in-out infinite}
+.yay h2{font-family:var(--display);font-weight:400;color:var(--deep);font-size:2rem;margin:6px 0}
+.yay p{font-size:1.1rem}
+.contract{background:var(--card);border:3px solid var(--pink);border-radius:24px;padding:16px;margin-top:16px;font-weight:500}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<input type="radio" name="a" id="yes">
+<input type="radio" name="a" id="no1">
+<input type="radio" name="a" id="no2">
+<input type="radio" name="a" id="no3">
+
+<div class="hearts" aria-hidden="true"><span>💗</span><span>🍓</span><span>💕</span><span>🌸</span><span>💖</span><span>🎀</span></div>
+
+<main>
+  <div class="bear" aria-hidden="true">🧸</div>
+  <h1>Hi, my favorite person!</h1>
+  <p class="sub">I made you a tiny website because you deserve big effort 🎀</p>
+
+  <section class="card">
+    <h2>Why I've been extra good</h2>
+    <ul>
+      <li>I listened to you, properly, with my whole heart</li>
+      <li>I remembered the little things you love</li>
+      <li>I made you smile (and I'm not done yet)</li>
+      <li>I built this whole website just for you</li>
+      <li> and also i missed u soo soo soo muchiiii</li>    </ul>
+  </section>
+
+  <section class="card" style="text-align:center">
+    <span class="tag">Official Proposal</span>
+    <span class="gift" aria-hidden="true">🎁</span>
+    <p style="margin:6px 0 12px">Your adoring, very well-behaved person humbly requests <b>one sweet reward tonight</b>. Payment accepted in cuddles, kisses and your prettyy pics. 🍓</p>
+  </section>
+
+  <div class="ask">
+    <div class="q">So... will you grant my reward tonight? 🥺👉👈</div>
+    <div class="btns">
+      <label class="btn yes" for="yes">Yes, you've earned it 💕</label>
+      <label class="btn no no1" for="no1">Hmm, no</label>
+      <label class="btn no no2" for="no2">Still no 😤</label>
+      <label class="btn no no3" for="no3">Nooo 🙈</label>
+    </div>
+    <p class="plead p1">Are you sure?? 🥺 Look at these puppy eyes 🐶 I've been SO good today...</p>
+    <p class="plead p2">Pretty please with a strawberry on top? 🍓 I'll bring you snacks and give u more attention.. 💗</p>
+    <p class="plead p3">Okay okay, the "No" button ran away crying 🏃‍♀️💨 Only one choice left now... 💕</p>
+  </div>
+
+  <div class="yay">
+    <span class="big" aria-hidden="true">🥰</span>
+    <h2>YAYYYY!</h2>
+    <p>You just made me the happiest person alive. I promise to be worth it. 💖</p>
+    <div class="contract">
+      📜 <b>Officially approved</b><br>
+      Reward: <b>granted</b> · Valid: <b>tonight</b><br>
+      Signed with love 💋
+    </div>
+  </div>
+</main>
+</body>
+</html>
